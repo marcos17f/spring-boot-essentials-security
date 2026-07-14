@@ -35,9 +35,4 @@ O diferencial do projeto é a sua base arquitetural, construída para ser escal�
 *   MySQL Server rodando localmente
 *   Maven
 
-### Passo a Passo
 
-1. **Clone o repositório:**
-   ```bash
-   git clone [https://github.com/SEU-USUARIO/nome-do-repositorio.git](https://github.com/SEU-USUARIO/nome-do-repositorio.git)
-   cd nome-do-repositorio
