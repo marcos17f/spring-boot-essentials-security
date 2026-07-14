@@ -1,8 +1,8 @@
 package br.com.felipe.spring_boot_essentials.controller;
 
-
 import br.com.felipe.spring_boot_essentials.database.model.AvaliacoesFisicasEntity;
 import br.com.felipe.spring_boot_essentials.dto.AlunoDto;
+import br.com.felipe.spring_boot_essentials.dto.AvaliacaoFisicaResponseDto;
 import br.com.felipe.spring_boot_essentials.exception.BadRequestException;
 import br.com.felipe.spring_boot_essentials.exception.NotFoundException;
 import br.com.felipe.spring_boot_essentials.service.AlunosService;
@@ -27,7 +27,7 @@ public class AlunosController {
     }
 
     @GetMapping("/{alunoId}/avaliacao")
-    public AvaliacoesFisicasEntity getAvaliacaoFisica(@PathVariable Integer alunoId) throws NotFoundException {
+    public AvaliacaoFisicaResponseDto getAvaliacaoFisica(@PathVariable Integer alunoId) throws NotFoundException {
         return alunosService.getAlunoAvalicacao(alunoId);
     }
 

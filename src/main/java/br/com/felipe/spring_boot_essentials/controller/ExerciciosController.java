@@ -1,8 +1,8 @@
 package br.com.felipe.spring_boot_essentials.controller;
 
 
-import br.com.felipe.spring_boot_essentials.database.model.ExerciciosEntity;
 import br.com.felipe.spring_boot_essentials.dto.ExercicioDto;
+import br.com.felipe.spring_boot_essentials.dto.ExercicioResponseDto;
 import br.com.felipe.spring_boot_essentials.service.ExerciciosService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class ExerciciosController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ExerciciosEntity> findAll(){
+    public List<ExercicioResponseDto> findAll(){
         return exerciciosService.findAll();
     }
 
@@ -33,7 +33,7 @@ public class ExerciciosController {
 
     @GetMapping("/grupos/{grupoMuscular}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ExerciciosEntity> getExercicioByGrupoMuscular(@PathVariable String grupoMuscular){
+    public List<ExercicioResponseDto> getExercicioByGrupoMuscular(@PathVariable String grupoMuscular){
         return exerciciosService.getExerciciosByGrupoMuscular(grupoMuscular);
     }
 }

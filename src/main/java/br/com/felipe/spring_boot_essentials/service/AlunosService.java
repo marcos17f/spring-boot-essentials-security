@@ -8,11 +8,12 @@ import br.com.felipe.spring_boot_essentials.database.repository.IAlunosRepositor
 import br.com.felipe.spring_boot_essentials.database.repository.IAvaliacoesFisicasRepository;
 import br.com.felipe.spring_boot_essentials.database.repository.ITreinosRepository;
 import br.com.felipe.spring_boot_essentials.dto.AlunoDto;
+import br.com.felipe.spring_boot_essentials.dto.AvaliacaoFisicaResponseDto;
 import br.com.felipe.spring_boot_essentials.exception.BadRequestException;
 import br.com.felipe.spring_boot_essentials.exception.NotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,7 +39,8 @@ public class AlunosService {
                 .build());
     }
 
-    public AvaliacoesFisicasEntity getAlunoAvalicacao(Integer alunoId) throws NotFoundException {
+    @Transactional(readOnly = true)
+    public AvaliacaoFisicaResponseDto getAlunoAvalicacao(Integer alunoId) throws NotFoundException {
         AlunosEntity aluno = alunosRepository.findById(alunoId)
                 .orElseThrow(() -> new NotFoundException("Aluno não encontrado"));
 
@@ -47,10 +49,17 @@ public class AlunosService {
             throw new NotFoundException("Avaliação física não encontrada para este aluno");
         }
 
-        return avaliacao;
+        return AvaliacaoFisicaResponseDto.builder()
+                .id(avaliacao.getId())
+                .nomeAluno(aluno.getNome())
+                .peso(avaliacao.getPeso())
+                .altura(avaliacao.getAltura())
+                .percentualGorduraCorporal(avaliacao.getPorcentagemGorduraCorporal())
+                .dataAvaliacao(avaliacao.getDataAvaliacao())
+                .build();
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     public void deletarAluno(Integer alunoId) throws Exception {
         AlunosEntity aluno = alunosRepository.findById(alunoId)
                 .orElseThrow(() -> new NotFoundException("Aluno não encontrado"));

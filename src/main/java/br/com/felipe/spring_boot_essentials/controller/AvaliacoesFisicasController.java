@@ -2,7 +2,7 @@ package br.com.felipe.spring_boot_essentials.controller;
 
 
 import br.com.felipe.spring_boot_essentials.dto.AvaliacaoFisicaDto;
-import br.com.felipe.spring_boot_essentials.dto.AvaliacoesFisicasProjection;
+import br.com.felipe.spring_boot_essentials.dto.AvaliacaoFisicaResponseDto;
 import br.com.felipe.spring_boot_essentials.exception.BadRequestException;
 import br.com.felipe.spring_boot_essentials.exception.NotFoundException;
 import br.com.felipe.spring_boot_essentials.service.AvaliacaoFisicaService;
@@ -31,13 +31,13 @@ public class AvaliacoesFisicasController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<AvaliacoesFisicasProjection> getAllAvaliacoes(){
+    public List<AvaliacaoFisicaResponseDto> getAllAvaliacoes(){
         return avaliacaoFisicaService.getAllAvaliacoes();
     }
 
     @GetMapping("/page/{page}/size/{size}")
     @ResponseStatus(HttpStatus.OK)
-    public Page<AvaliacoesFisicasProjection> getAllAvaliacoesPageable(@PathVariable Integer page,
+    public Page<AvaliacaoFisicaResponseDto> getAllAvaliacoesPageable(@PathVariable Integer page,
                                                                       @PathVariable Integer size){
         return avaliacaoFisicaService.getAllAvaliacoesPageable(page, size);
     }

@@ -3,8 +3,10 @@ package br.com.felipe.spring_boot_essentials.database.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "avaliacoes_fisicas")
@@ -25,4 +27,8 @@ public class AvaliacoesFisicasEntity {
     private BigDecimal altura;
     @Column(name = "percentual_gordura_corporal", nullable = false)
     private BigDecimal porcentagemGorduraCorporal;
+
+    @CreationTimestamp
+    @Column(name = "data_avaliacao", nullable = false, updatable = false)
+    private LocalDateTime dataAvaliacao;
 }
